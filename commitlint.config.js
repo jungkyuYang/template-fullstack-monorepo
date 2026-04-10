@@ -7,6 +7,7 @@ export default {
       "always",
       ["web", "api", "ui", "types", "database", "eslint-config", "typescript-config", "deps", "release"],
     ],
+    "scope-empty": [2, "never"],
     "subject-max-length": [2, "always", 100],
   },
 };
