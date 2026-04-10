@@ -49,5 +49,5 @@ prisma/migrations/*.sql.bak
 # Vercel 로컬 프로젝트 설정
 .vercel
 
-# Claude Code 로컬 설정
-.claude/settings.local.json
+# Claude Code (토큰 등 개인 설정 포함)
+.claude/
