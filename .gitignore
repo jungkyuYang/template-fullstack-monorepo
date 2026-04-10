@@ -42,3 +42,12 @@ coverage
 
 # Prisma
 prisma/migrations/*.sql.bak
+
+# TypeScript 증분 빌드 캐시
+*.tsbuildinfo
+
+# Vercel 로컬 프로젝트 설정
+.vercel
+
+# Claude Code 로컬 설정
+.claude/settings.local.json
