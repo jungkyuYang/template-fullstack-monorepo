@@ -8,6 +8,8 @@
     "./globals.css": "./src/globals.css"
   },
   "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
@@ -18,9 +20,15 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@storybook/react-vite": "10.3.5",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5.8.0"
+    "@vitejs/plugin-react": "^4.7.0",
+    "storybook": "10.3.5",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.8.0",
+    "vite": "^6.4.2"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
