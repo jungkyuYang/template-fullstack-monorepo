@@ -9,6 +9,7 @@ dist
 out
 build
 .turbo
+storybook-static
 
 # Environment files
 .env
@@ -29,7 +30,7 @@ pnpm-debug.log*
 Thumbs.db
 
 # IDE
-.vscode
+.vscode/*.code-workspace
 .idea
 *.suo
 *.ntvs*

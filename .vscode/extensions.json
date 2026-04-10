@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    // 필수
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+
+    // Prisma
+    "Prisma.prisma",
+
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // 모노레포
+    "zxh404.vscode-proto3",
+
+    // 생산성
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "steoates.autoimport"
+  ]
+}

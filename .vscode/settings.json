@@ -1,0 +1,43 @@
+{
+  // 기본 포맷터
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // TypeScript
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // ESLint
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [
+    { "pattern": "apps/*/" },
+    { "pattern": "packages/*/" }
+  ],
+
+  // Tailwind CSS
+  "tailwindCSS.experimental.configFile": {},
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+
+  // Prisma
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+
+  // 파일 연결
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // 탐색기에서 숨길 파일
+  "files.exclude": {
+    "**/.turbo": true,
+    "**/node_modules": true,
+    "**/.next": true
+  }
+}
