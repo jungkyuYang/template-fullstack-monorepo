@@ -25,7 +25,8 @@
 | 프론트엔드 | Next.js 16 (App Router) | `apps/web` |
 | 백엔드 | Hono + @hono/node-server | `apps/api` |
 | ORM | Prisma | `packages/database` |
-| 공유 UI | shadcn/ui 기반 (cva) | `packages/ui` |
+| 공유 UI | CVA 기반 컴포넌트 | `packages/ui` |
+| UI 문서 | Storybook 10 (react-vite + addon-docs) | `pnpm storybook` |
 | 공유 타입 | 직접 정의 | `packages/types` |
 | ESLint | 공유 config + FSD boundaries | `packages/eslint-config` |
 | TypeScript | 공유 config | `packages/typescript-config` |
@@ -62,6 +63,9 @@ template-fullstack-monorepo/
 ├── .husky/
 │   ├── pre-commit                  # lint-staged 실행
 │   └── commit-msg                  # commitlint 실행
+├── .github/
+│   └── workflows/
+│       └── ci.yml                  # GitHub Actions CI (lint → typecheck → build)
 ├── commitlint.config.js            # 커밋 메시지 규칙
 ├── CLAUDE.md
 ├── docs/
@@ -210,6 +214,8 @@ feat: 뭔가 추가
 | `typecheck` | O | `^typecheck` |
 | `test` | O | — |
 | `format` | X | — |
+| `storybook` | X (persistent) | — |
+| `build-storybook` | O | — |
 
 **새 태스크 추가 시 반드시 `turbo.json`에 먼저 등록 후 각 앱 `package.json`에 스크립트 추가.**
 
@@ -229,7 +235,42 @@ packages/database/.env    # DB 연결 (DATABASE_URL)
 
 ---
 
-## 11. 절대 하지 말 것 (AI 금지 행위)
+## 11. 알아야 할 특이사항
+
+### Next.js 16 — `next lint` 제거됨
+Next.js 16부터 `next lint` CLI 명령이 없습니다. 린트는 `eslint .`로 직접 실행합니다.
+
+```json
+// apps/web/package.json
+"lint": "eslint ."
+```
+
+### React import 필수 (`jsx: preserve`)
+`tsconfig`에 `"jsx": "preserve"` 설정으로 인해 JSX를 사용하는 모든 파일에 React를 명시적으로 import해야 합니다.
+
+```typescript
+// 필수
+import React from "react";
+```
+
+### ESLint config 파일 자체를 ignore 처리
+각 패키지의 `eslint.config.js`는 `tsconfig`에 포함되지 않으므로 반드시 ignores에 추가해야 합니다.
+
+```js
+{ ignores: ["eslint.config.js", "dist/**"] }
+```
+
+### Prisma 빌드 스크립트
+pnpm이 기본적으로 Prisma 빌드 스크립트를 차단합니다. `package.json`의 `pnpm.onlyBuiltDependencies`로 허용 목록이 관리됩니다. CI에서는 별도로 `pnpm --filter @repo/database db:generate`를 실행합니다.
+
+### Storybook 컴포넌트 작성 규칙
+- `import React from "react"` 필수 (render 함수 또는 JSX 직접 사용 시)
+- `Meta`, `StoryObj`는 `@storybook/react`에서 import
+- `tags: ["autodocs"]` 사용 시 `@storybook/addon-docs`가 반드시 설치되어 있어야 함
+
+---
+
+## 12. 절대 하지 말 것 (AI 금지 행위)
 
 - `npm install` 또는 `yarn add` — **pnpm만 사용**
 - 루트 `package.json`에 앱/비즈니스 로직 의존성 추가
@@ -243,13 +284,14 @@ packages/database/.env    # DB 연결 (DATABASE_URL)
 
 ---
 
-## 12. 자주 쓰는 명령어
+## 13. 자주 쓰는 명령어
 
 ```bash
 # 개발 서버
 pnpm dev              # 전체
 pnpm dev:web          # 프론트만
 pnpm dev:api          # 백엔드만
+pnpm storybook        # UI 컴포넌트 문서 (http://localhost:6006)
 
 # 빌드
 pnpm build            # 전체
@@ -274,7 +316,7 @@ pnpm --filter @repo/database db:studio    # Prisma Studio
 
 ---
 
-## 13. 작업 시작 전 체크리스트 (AI용)
+## 14. 작업 시작 전 체크리스트 (AI용)
 
 - [ ] 이 `CLAUDE.md` 전체를 읽었는가
 - [ ] `docs/architecture.md`를 읽었는가
@@ -285,3 +327,6 @@ pnpm --filter @repo/database db:studio    # Prisma Studio
 - [ ] FSD 레이어 import 방향이 올바른가
 - [ ] 커밋 메시지가 `타입(스코프): 설명` 형식인가
 - [ ] `pnpm install`을 루트에서 실행했는가
+- [ ] Prisma 관련 작업 후 `db:generate`를 실행했는가
+- [ ] JSX 사용 파일에 `import React from "react"`가 있는가
+- [ ] 새 ESLint config에 `eslint.config.js` ignore 처리를 했는가
