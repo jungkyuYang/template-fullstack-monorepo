@@ -30,9 +30,15 @@ const buttonVariants = cva(
   }
 );
 
+/** 공통 버튼 컴포넌트입니다. variant와 size로 스타일을 제어합니다. */
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  /** 버튼 스타일 종류 */
+  variant?: "primary" | "secondary" | "destructive" | "ghost" | "outline";
+  /** 버튼 크기 */
+  size?: "sm" | "md" | "lg";
+}
 
 export function Button({ className, variant, size, ...props }: ButtonProps) {
   return (

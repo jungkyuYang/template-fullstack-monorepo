@@ -6,6 +6,13 @@ const meta: Meta<typeof Button> = {
   title: "UI/Button",
   component: Button,
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component: "공통 버튼 컴포넌트입니다. `variant`와 `size` prop으로 스타일을 제어합니다.",
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: "select",
