@@ -3,6 +3,7 @@ import boundaries from "eslint-plugin-boundaries";
 
 /** @type {import("typescript-eslint").Config} */
 export default [
+  { ignores: ["eslint.config.js", "next.config.ts", ".next/**", "dist/**"] },
   ...nextConfig,
   {
     languageOptions: {

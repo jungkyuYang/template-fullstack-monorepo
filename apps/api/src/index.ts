@@ -24,7 +24,7 @@ app.route("/users", users);
 
 // ─── 서버 시작 ─────────────────────────────────────────────────
 serve({ fetch: app.fetch, port: env.PORT }, (info) => {
-  console.log(`🚀 API 서버 실행 중: http://localhost:${info.port}`);
+  console.warn(`API server running: http://localhost:${String(info.port)}`);
 });
 
 export default app;

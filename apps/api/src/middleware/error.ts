@@ -1,14 +1,14 @@
 import type { Context } from "hono";
 import type { ApiError } from "@repo/types";
 
-export async function errorHandler(
+export function errorHandler(
   err: Error,
   c: Context
-): Promise<Response> {
+): Response {
   console.error(err);
 
   const body: ApiError = {
-    error: err.message ?? "Internal Server Error",
+    error: err.message || "Internal Server Error",
     statusCode: 500,
   };
 
