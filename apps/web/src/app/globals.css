@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* packages/ui의 Tailwind 클래스도 스캔 */
+@source "../../../../packages/ui/src";

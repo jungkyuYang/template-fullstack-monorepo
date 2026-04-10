@@ -1,0 +1,15 @@
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+import baseConfig from "./base.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({ baseDirectory: __dirname });
+
+/** @type {import("typescript-eslint").Config} */
+export default [
+  ...baseConfig,
+  ...compat.extends("next/core-web-vitals"),
+];
