@@ -6,7 +6,9 @@ const config: StorybookConfig = {
   addons: ["@storybook/addon-docs"],
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: {
+      docgen: "react-docgen-typescript",
+    },
   },
   viteFinal: async (config) => {
     config.plugins = [...(config.plugins ?? []), tailwindcss()];
